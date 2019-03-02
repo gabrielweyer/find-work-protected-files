@@ -1,0 +1,40 @@
+ Listing C:\
+ New files added to this directory will not be encrypted.
+U AWSToolsAndSDKForNet_sdk-3.3.41.0_ps-3.3.41.0_tk-1.11.2.0.msi
+E 00000557.bin
+  Compatibility Level:
+    Enterprise Protected
+  Enterprise protected by:
+    company-name-7.com
+  Recovery Certificates:
+    alec(alec@MVTY)
+    Certificate thumbprint: 70B3 BBC2 F58B 5AC8 9C6A F900 5C57 11A5 A5E9 2704
+  Key Information:
+    Algorithm: AES
+    Key Length: 256
+    Key Entropy: 256
+E 00000558.bin
+  Compatibility Level:
+    Enterprise Protected
+  Enterprise protected by:
+    company-name-8.com
+  Recovery Certificates:
+    alec(alec@MVTY)
+    Certificate thumbprint: 70B3 BBC2 F58B 5AC8 9C6A F900 5C57 11A5 A5E9 2704
+  Key Information:
+    Algorithm: AES
+    Key Length: 256
+    Key Entropy: 256
+E 00000559.bin
+  Compatibility Level:
+    Enterprise Protected
+  Enterprise protected by:
+    company-name-9.com
+  Recovery Certificates:
+    alec(kiera@MVTY)
+    Certificate thumbprint: 70B3 BBC2 F58B 5AC8 9C6A F900 5C57 11A5 A5E9 2704
+  Key Information:
+    Algorithm: AES
+    Key Length: 256
+    Key Entropy: 256
+U AWSToolsAndSDKForNet_sdk-3.3.41.0_ps-3.3.41.0_tk-1.11.2.1.msi

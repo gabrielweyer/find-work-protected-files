@@ -1,0 +1,109 @@
+#module nuget:?package=Cake.DotNetTool.Module&version=0.1.0
+
+var target = Argument("target", "Default");
+var configuration = Argument("configuration", "Release");
+
+var assemblyVersion = "1.0.0";
+var packageVersion = assemblyVersion;
+
+var artifactsDir = MakeAbsolute(Directory("artifacts"));
+var testsResultsDir = artifactsDir.Combine(Directory("tests-results"));
+var packagesDir = artifactsDir.Combine(Directory("packages"));
+
+var solutionPath = "./FindWorkProtectedFiles.sln";
+
+Task("Clean")
+    .Does(() =>
+    {
+        CleanDirectory(artifactsDir);
+
+        var settings = new DotNetCoreCleanSettings
+        {
+            Configuration = configuration
+        };
+
+        DotNetCoreClean(solutionPath, settings);
+    });
+
+Task("Restore")
+    .IsDependentOn("Clean")
+    .Does(() =>
+    {
+        DotNetCoreRestore();
+    });
+
+Task("Version")
+    .IsDependentOn("Restore")
+    .Does(() =>
+    {
+        var buildNumber = EnvironmentVariable("BUILD_BUILDNUMBER");
+
+        if (buildNumber != null)
+        {
+            packageVersion = buildNumber;
+        }
+
+        Information($"Assembly Version: {assemblyVersion}");
+        Information($"Package Version: {packageVersion }");
+    });
+
+Task("Build")
+    .IsDependentOn("Version")
+    .Does(() =>
+    {
+        var settings = new DotNetCoreBuildSettings
+        {
+            Configuration = configuration,
+            NoIncremental = true,
+            NoRestore = true,
+            MSBuildSettings = new DotNetCoreMSBuildSettings()
+                .SetVersion(assemblyVersion)
+                .WithProperty("FileVersion", packageVersion)
+                .WithProperty("InformationalVersion", packageVersion)
+                .WithProperty("nowarn", "7035")
+        };
+
+        DotNetCoreBuild(solutionPath, settings);
+    });
+
+Task("Test")
+    .IsDependentOn("Build")
+    .Does(() =>
+    {
+        var settings = new DotNetCoreTestSettings
+        {
+            Configuration = configuration,
+            NoBuild = true,
+            NoRestore = true,
+            Logger = "trx;LogFileName=results.trx",
+            ResultsDirectory = testsResultsDir
+        };
+
+        DotNetCoreTest("./tests/FindWorkProtectedFilesTests/FindWorkProtectedFilesTests.csproj", settings);
+    })
+    .DeferOnError();
+
+Task("Pack")
+    .IsDependentOn("Test")
+    .WithCriteria(() => HasArgument("pack"))
+    .Does(() =>
+    {
+        var settings = new DotNetCorePackSettings
+        {
+            Configuration = configuration,
+            NoBuild = true,
+            NoRestore = true,
+            OutputDirectory = packagesDir,
+            MSBuildSettings = new DotNetCoreMSBuildSettings()
+                .WithProperty("PackageVersion", packageVersion)
+        };
+
+        GetFiles("./src/*/*.csproj")
+            .ToList()
+            .ForEach(f => DotNetCorePack(f.FullPath, settings));
+    });
+
+Task("Default")
+    .IsDependentOn("Pack");
+
+RunTarget(target);

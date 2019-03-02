@@ -1,0 +1,47 @@
+pool:
+  vmImage: 'Ubuntu-16.04'
+
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    exclude:
+    - .editorconfig
+    - README.md
+    - ../README.md
+    - ../Find-WorkProtectedFiles.ps1
+
+variables:
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+
+steps:
+
+- task: DotNetCoreInstaller@0
+  displayName: 'Use .NET Core SDK 2.2.104'
+  inputs:
+    version: 2.2.104
+
+- bash: |
+    dotnet tool install --global Cake.Tool --version 0.31.0
+  displayName: 'Install "Cake.Tool" .NET Core global tool'
+
+- bash: |
+    export PATH="$PATH:$HOME/.dotnet/tools"
+    dotnet cake build.cake --bootstrap
+    dotnet cake build.cake --pack
+  displayName: 'Build'
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'VSTest'
+    testResultsFiles: '*.trx'
+    searchFolder: '$(System.DefaultWorkingDirectory)/artifacts/tests-results'
+  condition: succeededOrFailed()
+  displayName: 'Publish Test Results'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: Global Tool'
+  inputs:
+    PathtoPublish: artifacts/packages
+    ArtifactName: global-tool
