@@ -9,8 +9,12 @@ trigger:
     exclude:
     - .editorconfig
     - README.md
-    - ../README.md
-    - ../Find-WorkProtectedFiles.ps1
+
+pr:
+  paths:
+    exclude:
+    - .editorconfig
+    - README.md
 
 variables:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
