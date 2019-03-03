@@ -9,7 +9,7 @@ List the files protected by [Windows Information Protection][wip]. This tool use
 - `Windows`
 - [.NET Core SDK 2.2.104][dotnet-core-sdk]
 
-Once you're done, run this command to initialise `Cake`:
+Run this command to initialise `Cake`:
 
 ```powershell
 .\bootstrap.ps1
