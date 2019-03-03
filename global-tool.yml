@@ -3,7 +3,8 @@ pool:
 
 trigger:
   branches:
-    include: ['*']
+    include:
+    - master
   paths:
     exclude:
     - .editorconfig
