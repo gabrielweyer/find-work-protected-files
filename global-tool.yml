@@ -12,6 +12,8 @@ trigger:
     - README.md
 
 pr:
+  branches:
+    include: ['*']
   paths:
     exclude:
     - .editorconfig
