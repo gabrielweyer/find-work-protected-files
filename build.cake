@@ -1,5 +1,7 @@
 #module nuget:?package=Cake.DotNetTool.Module&version=0.1.0
 
+#tool dotnet:?package=GitVersion.Tool&version=4.0.1-beta1-58
+
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 
@@ -32,23 +34,21 @@ Task("Restore")
         DotNetCoreRestore();
     });
 
-Task("Version")
+Task("SemVer")
     .IsDependentOn("Restore")
     .Does(() =>
     {
-        var buildNumber = EnvironmentVariable("BUILD_BUILDNUMBER");
+        var gitVersion = GitVersion();
 
-        if (buildNumber != null)
-        {
-            packageVersion = buildNumber;
-        }
+        assemblyVersion = gitVersion.AssemblySemVer;
+        packageVersion = gitVersion.NuGetVersion;
 
-        Information($"Assembly Version: {assemblyVersion}");
-        Information($"Package Version: {packageVersion }");
-    });
+        Information($"AssemblySemVer: {assemblyVersion}");
+        Information($"NuGetVersion: {packageVersion}");
+});
 
 Task("Build")
-    .IsDependentOn("Version")
+    .IsDependentOn("SemVer")
     .Does(() =>
     {
         var settings = new DotNetCoreBuildSettings

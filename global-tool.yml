@@ -11,6 +11,15 @@ trigger:
     - LICENSE
     - README.md
 
+pr:
+  branches:
+    include: ['*']
+  paths:
+    exclude:
+    - .editorconfig
+    - LICENSE
+    - README.md
+
 variables:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
 
