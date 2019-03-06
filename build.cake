@@ -45,7 +45,8 @@ Task("SemVer")
 
         Information($"AssemblySemVer: {assemblyVersion}");
         Information($"NuGetVersion: {packageVersion}");
-});
+        Information($"##vso[task.setvariable variable=NuGetVersion]{packageVersion}");
+    });
 
 Task("Build")
     .IsDependentOn("SemVer")
