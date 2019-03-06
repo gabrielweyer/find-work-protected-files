@@ -2,7 +2,9 @@
 
 List the files protected by [Windows Information Protection][wip]. This tool uses [Cipher.exe][cipher] to identify the work protected files.
 
-[![Build Status](https://dev.azure.com/gabrielweyer/find-work-protected-files/_apis/build/status/gabrielweyer.find-work-protected-files?branchName=master)][build]
+| CI | Package | Release |
+| - | - | - |
+| [![Build Status][build-badge]][build] | `dotnet-fwpf` | [![NuGet][nuget-tool-badge]][nuget-tool-command] |
 
 ## Pre-requisites
 
@@ -75,3 +77,6 @@ We're done, have a good one
 [wip]: https://docs.microsoft.com/en-us/windows/security/information-protection/windows-information-protection/protect-enterprise-data-using-wip
 [cipher]: https://support.microsoft.com/en-au/help/298009/cipher-exe-security-tool-for-the-encrypting-file-system
 [build]: https://dev.azure.com/gabrielweyer/find-work-protected-files/_build/latest?definitionId=17&branchName=master
+[build-badge]: https://dev.azure.com/gabrielweyer/find-work-protected-files/_apis/build/status/gabrielweyer.find-work-protected-files?branchName=master
+[nuget-tool-badge]: https://img.shields.io/nuget/v/dotnet-fwpf.svg?label=NuGet&style=flat-square
+[nuget-tool-command]: https://www.nuget.org/packages/dotnet-fwpf
