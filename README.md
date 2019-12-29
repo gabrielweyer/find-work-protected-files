@@ -6,40 +6,19 @@ List the files protected by [Windows Information Protection][wip]. This tool use
 | - | - | - |
 | [![Build Status][build-badge]][build] | `dotnet-fwpf` | [![NuGet][nuget-tool-badge]][nuget-tool-command] |
 
-## Pre-requisites
-
-- `Windows`
-- [.NET Core SDK 2.2.104][dotnet-core-sdk]
-
-Run this command to initialise `Cake`:
+## Installation
 
 ```powershell
-.\bootstrap.ps1
+dotnet tool install --global dotnet-fwpf
 ```
 
-You can then run the build script:
-
-```powershell
-dotnet cake build.cake
-```
-
-If you want to pack the `.NET Core Global Tool` you can run: `dotnet cake build.cake --pack`
-
-## Use the .NET Core global tool
-
-The `Azure DevOps` [build][build] is publishing the global tool as a build artifact named `global-tool`
-
-```powershell
-dotnet tool install --global --add-source <directory-where-you-downloaded-the-package> dotnet-fwpf
-```
-
-You can then use it:
+## Usage
 
 ```powershell
 dotnet fwpf C:\
 ```
 
-## Sample output
+### Sample output
 
 ```plaintext
 λ  dotnet fwpf C:\
@@ -72,6 +51,24 @@ cipher output parsing took: 00:00:01.6937454
 
 We're done, have a good one
 ```
+
+## Running locally
+
+You need to be on `Windows` and install the [.NET Core SDK 3.1.100][dotnet-core-sdk].
+
+Once you're done, run this command to initialise `Cake`:
+
+```powershell
+.\bootstrap.ps1
+```
+
+You can then run the build script:
+
+```powershell
+dotnet cake build.cake
+```
+
+If you want to pack the `.NET Core Global Tool` you can run: `dotnet cake build.cake --pack`
 
 [dotnet-core-sdk]: https://dotnet.microsoft.com/download
 [wip]: https://docs.microsoft.com/en-us/windows/security/information-protection/windows-information-protection/protect-enterprise-data-using-wip

@@ -1,5 +1,5 @@
 pool:
-  vmImage: 'Ubuntu-16.04'
+  vmImage: 'Ubuntu-18.04'
 
 trigger:
   branches:
@@ -25,13 +25,14 @@ variables:
 
 steps:
 
-- task: DotNetCoreInstaller@0
-  displayName: 'Use .NET Core SDK 2.2.104'
+- task: UseDotNet@2
+  displayName: 'Use .NET Core SDK 3.1.100'
   inputs:
-    version: 2.2.104
+    packageType: sdk
+    version: 3.1.100
 
 - bash: |
-    dotnet tool install --global Cake.Tool --version 0.31.0
+    dotnet tool install --global Cake.Tool --version 0.35.0
   displayName: 'Install "Cake.Tool" .NET Core global tool'
 
 - bash: |
