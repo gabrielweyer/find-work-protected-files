@@ -32,8 +32,8 @@ steps:
     version: 3.1.300
 
 - bash: |
-    dotnet tool install --global Cake.Tool --version 0.35.0
-  displayName: 'Install "Cake.Tool" .NET Core global tool'
+    dotnet tool restore
+  displayName: 'Restoring "Cake.Tool" .NET Core local tool'
 
 - bash: |
     export PATH="$PATH:$HOME/.dotnet/tools"
