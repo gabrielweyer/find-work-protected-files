@@ -54,7 +54,7 @@ We're done, have a good one
 
 ## Running locally
 
-You need to be on `Windows` and install the [.NET Core SDK 3.1.100][dotnet-core-sdk].
+You need to be on `Windows` and install the [.NET Core SDK 3.1.300][dotnet-core-sdk].
 
 Once you're done, run this command to initialise `Cake`:
 
