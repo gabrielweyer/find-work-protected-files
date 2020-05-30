@@ -26,10 +26,10 @@ variables:
 steps:
 
 - task: UseDotNet@2
-  displayName: 'Use .NET Core SDK 3.1.100'
+  displayName: 'Use .NET Core SDK 3.1.300'
   inputs:
     packageType: sdk
-    version: 3.1.100
+    version: 3.1.300
 
 - bash: |
     dotnet tool install --global Cake.Tool --version 0.35.0
