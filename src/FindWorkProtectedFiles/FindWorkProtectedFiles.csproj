@@ -6,6 +6,7 @@
     <AssemblyName>dotnet-fwpf</AssemblyName>
     <PackAsTool>true</PackAsTool>
     <PackageId>dotnet-fwpf</PackageId>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
 </Project>
